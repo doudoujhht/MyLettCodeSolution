@@ -46,7 +46,7 @@ public class Leetcode {
 
     }
 
-    public boolean isPowerOfFour(int n) {
+    public static boolean isPowerOfFour(int n) {
         while (true){
             if (n==1) return true;
             if (n==0) return false;
@@ -55,7 +55,7 @@ public class Leetcode {
         }
     }
 
-    public boolean isPowerOfThree2(int n) {
+    public static boolean isPowerOfThree2(int n) {
         if (n <= 0)
             return false;
         /* le nombre est la puissance de 3 maximale qu'un integer peut suporter (3^19)
@@ -72,7 +72,7 @@ public class Leetcode {
         = [nums[0], nums[2], nums[1], nums[5], nums[3], nums[4]]
         = [0,1,2,4,5,3]
     */
-    public int[] buildArray(int[] nums) {
+    public static int[] buildArray(int[] nums) {
         int[] s=new int[nums.length];
         for (int i = 0; i < nums.length; i++) {
             s[i]=nums[nums[i]];
@@ -82,7 +82,7 @@ public class Leetcode {
 
     // ca retrouve le nombre de paires qu'il y'a dans un array
     // on prend le premier nombre et on le compare avec tous les autres qui si c'est une paire on rajoute un au compte
-    public int numIdenticalPairs(int[] nums) {
+    public static int numIdenticalPairs(int[] nums) {
         int count=0;
         for (int i = 0; i < nums.length; i++) {
             for (int j = i+1; j < nums.length; j++) {
@@ -98,7 +98,7 @@ public class Leetcode {
 
 
     //ca permet de classé un array apres avoir mis tous les nombre du arrai au carré
-    public int[] sortedSquares(int[] nums) {
+    public static int[] sortedSquares(int[] nums) {
         //ca met les nombres au carré
         for (int i = 0; i < nums.length; i++) {
             nums[i]=nums[i]*nums[i];
@@ -119,7 +119,7 @@ public class Leetcode {
     }
 
     //j'ai pas ecris moi meme cet algorithme mais il a l,air interessant so je vais voir comment il marche un jour
-    public int[] sortedSquares2(int[] nums) {
+    public static int[] sortedSquares2(int[] nums) {
         //two pointers
         int n = nums.length;
         int[] ans = new int[n];
@@ -138,8 +138,8 @@ public class Leetcode {
         return ans;
     }
 
-    //dans un array classé et ou tous les nombre sont distinct retrouver la position d'un nombre ou retourner -1 si il n'est pas trouver
-    public int searchInsert(int[] nums, int target) {
+    //dans un array classé et ou tous les nombres sont distincts ça permet de savoir ou le nombre serais mis si il devait etre inserer
+    public static int searchInsert(int[] nums, int target) {
 
         int first=0;
         int last= nums.length-1;
@@ -150,10 +150,22 @@ public class Leetcode {
             midpoint=(first+last)/2;//on trouve le millueu
             if (nums[midpoint]==target) return midpoint;//si le nombre est egal au nombre au millueu du array on renvoie ca sinon
             else if (nums[midpoint]<target) first=midpoint+1;//si le nombre du millueu est plus petit le debut devient le millueu +1
-            else last=midpoint-1;//si le nombre du millue est plus grand la fin devien le nombre du millueu moins 1
+            else last=midpoint-1;//si le nombre du milieu est plus grand la fin devien le nombre du millueu moins 1
         }
-        if (target>nums[midpoint]) midpoint++;//si la target est plus grand que le millue c'est que c'est le prochain la bonne reponse
+        if (target>nums[midpoint]) midpoint++;//si la target est plus grand que le millueu c'est que c'est le prochain la bonne réponse
         return midpoint;//retourne le nombre du millueu final
+    }
+
+    //dans un array classé on doit trouver la position d'un nombre ou retourner -1
+    public static int search(int[] nums, int target) {
+        int pivot, left = 0, right = nums.length - 1;
+        while (left <= right) {
+            pivot = left + (right - left) / 2;
+            if (nums[pivot] == target) return pivot;
+            if (target < nums[pivot]) right = pivot - 1;
+            else left = pivot + 1;
+        }
+        return -1;
     }
 
 
