@@ -17,6 +17,16 @@ public class Leetcode {
 
             n/=3; //on divise le nombre par trois pour pouvoir refaire l'operation
         }
+
+
+    }
+
+    public boolean isPowerOfThree2(int n) {
+        if (n <= 0)
+            return false;
+        /* le nombre est la puissance de 3 maximale qu'un integer peut suporter (3^19)
+        les puissances divisé par des puissances plus petites ne laissent pas de reste.*/
+        return 1162261467 % n == 0;
     }
 
 
