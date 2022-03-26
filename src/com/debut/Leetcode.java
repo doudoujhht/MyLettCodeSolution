@@ -172,8 +172,8 @@ public class Leetcode {
     //deplacer tous les zeros d'un array a la fin
     public void moveZeroes(int[] nums) {
         ArrayList<String> s=new ArrayList<>() ;
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i]!=0) s.add(String.valueOf(nums[i]));
+        for (int num : nums) {
+            if (num != 0) s.add(String.valueOf(num));
         }
 
         for (int i = 0; i < nums.length; i++) {
@@ -209,8 +209,8 @@ public class Leetcode {
 
     public void moveZeroes3(int[] nums) {
         ArrayList<String> s=new ArrayList<>() ;
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i]!=0) s.add(String.valueOf(nums[i]));
+        for (int num : nums) {
+            if (num != 0) s.add(String.valueOf(num));
         }
         for (int i = 0; i < s.size(); i++) {
             nums[i]=Integer.parseInt(s.get(i));
@@ -219,6 +219,47 @@ public class Leetcode {
             nums[i]=0;
         }
 
+    }
+
+    /*
+    Input: mat = [[1,1,1,1],
+                  [1,1,1,1],
+                  [1,1,1,1],
+                  [1,1,1,1]]
+    Output: 8
+    ca fait la somme des diagonales de la matrice
+
+            int[][] mat = {
+                          {1,2,3},
+                          {4,5,6},
+                          {7,8,9},
+                          };
+    ca fait 25 parce que le 5 du milieu ne compte pas
+    */
+
+    public static int diagonalSum(int[][] mat) {
+        int sum=0;//la somme
+        for (int i = 0; i < mat.length; i++) {
+            sum+=mat[i][i];//À chaque tour les deux i augmente du coup on descend et on avance dans le ArrayList
+            sum+=mat[mat.length-i-1][i];//la meme chose qu'en haut, mais on part du côté inversé pour prendre la deuxième diagonale
+        }
+        if (mat.length%2==1) sum=sum- mat[mat.length/2][mat.length/2];//si jamais la matrice a une longueur impaire on doit retirer le milieu
+
+        return sum;// retourner la somme
+    }
+
+    /*creer un array qui est egale a l'array d'origine mais doublé
+    exemple:Input: nums = [1,2,1]
+            Output: [1,2,1,1,2,1]
+     je pourrais aussi duplicate le Array et le concatener
+    */
+
+    public static int[] getConcatenation(int[] nums) {
+        int[] nums1=new int[nums.length*2];
+        for (int i = 0; i < nums.length; i++) {
+            nums1[i]=nums1[i+ nums.length]=nums[i];
+        }
+        return nums1;
     }
 
 
