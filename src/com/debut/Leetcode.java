@@ -1,4 +1,7 @@
 package com.debut;
+
+import java.util.Arrays;
+
 //l'ensemble de mes solution leetcode
 public class Leetcode {
 
@@ -75,6 +78,82 @@ public class Leetcode {
             s[i]=nums[nums[i]];
         }
         return s;
+    }
+
+    // ca retrouve le nombre de paires qu'il y'a dans un array
+    // on prend le premier nombre et on le compare avec tous les autres qui si c'est une paire on rajoute un au compte
+    public int numIdenticalPairs(int[] nums) {
+        int count=0;
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i+1; j < nums.length; j++) {
+                if (nums[i]==nums[j]){
+                    count++;
+                }
+            }
+        }
+        return count;
+
+    }
+
+
+
+    //ca permet de classé un array apres avoir mis tous les nombre du arrai au carré
+    public int[] sortedSquares(int[] nums) {
+        //ca met les nombres au carré
+        for (int i = 0; i < nums.length; i++) {
+            nums[i]=nums[i]*nums[i];
+        }
+
+        //ca ordonne les nombres du array du plus petit au plus grand arrays.sort fait la meme chose
+        //Arrays.sort(nums);
+        for (int i = 0; i < nums.length ; i++) {
+            for (int j = 0; j < nums.length ; j++) {
+                if (nums[i]<nums[j]){
+                    int temp=nums[i];
+                    nums[i]=nums[j];
+                    nums[j]= temp;
+                }
+            }
+        }
+        return nums;
+    }
+
+    //j'ai pas ecris moi meme cet algorithme mais il a l,air interessant so je vais voir comment il marche un jour
+    public int[] sortedSquares2(int[] nums) {
+        //two pointers
+        int n = nums.length;
+        int[] ans = new int[n];
+
+        for (int i = 0, j = n - 1, index = n - 1; i <= j;) {
+            if (nums[i] * nums[i] > nums[j] * nums[j]) {
+                ans[index] = nums[i] * nums[i];
+                i++;
+            } else {
+                ans[index] = nums[j] * nums[j];
+                j--;
+            }
+            //put from end to start
+            index--;
+        }
+        return ans;
+    }
+
+    //dans un array classé et ou tous les nombre sont distinct retrouver la position d'un nombre ou retourner -1 si il n'est pas trouver
+    public int searchInsert(int[] nums, int target) {
+
+        int first=0;
+        int last= nums.length-1;
+        int midpoint=0;
+
+        // tant que first sera plus petit ou egal a last
+        while (first<=last){
+            midpoint=(first+last)/2;//on trouve le millueu
+            if (nums[midpoint]==target) return midpoint;//si le nombre est egal au nombre au millueu du array on renvoie ca sinon
+            else if (nums[midpoint]<target) first=midpoint+1;//si le nombre du millueu est plus petit le debut devient le millueu +1
+            else last=midpoint-1;//si le nombre du millue est plus grand la fin devien le nombre du millueu moins 1
+        }
+        if (target>nums[midpoint]) midpoint++;//si la target est plus grand que le millue c'est que c'est le prochain la bonne reponse
+        return midpoint;//retourne le nombre du millueu final
     }
 
 
