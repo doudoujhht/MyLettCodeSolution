@@ -1,5 +1,6 @@
 package com.debut;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 //l'ensemble de mes solution leetcode
@@ -166,6 +167,58 @@ public class Leetcode {
             else left = pivot + 1;
         }
         return -1;
+    }
+
+    //deplacer tous les zeros d'un array a la fin
+    public void moveZeroes(int[] nums) {
+        ArrayList<String> s=new ArrayList<>() ;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i]!=0) s.add(String.valueOf(nums[i]));
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            if (i< s.size()){
+                nums[i]=Integer.parseInt(s.get(i));
+            }
+            else {
+                nums[i]=0;
+            }
+        }
+
+    }
+
+    //pas ma solution mais c'est une solution interessante
+    public void moveZeroes2(int[] nums) {
+        int cur = 0;
+        int i = 0;
+
+        while ( cur < nums.length){
+            if (nums[cur] != 0) {
+                nums[i] = nums[cur];
+                i++;
+            }
+            cur++;
+        }
+
+        while ( i < nums.length){
+            nums[i] = 0;
+            i++;
+
+        }
+    }
+
+    public void moveZeroes3(int[] nums) {
+        ArrayList<String> s=new ArrayList<>() ;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i]!=0) s.add(String.valueOf(nums[i]));
+        }
+        for (int i = 0; i < s.size(); i++) {
+            nums[i]=Integer.parseInt(s.get(i));
+        }
+        for (int i = s.size(); i < nums.length; i++) {
+            nums[i]=0;
+        }
+
     }
 
 
